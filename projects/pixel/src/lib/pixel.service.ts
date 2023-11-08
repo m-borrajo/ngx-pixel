@@ -137,7 +137,7 @@ export class PixelService {
     }
 
     const scriptMobileBridge = appId
-      ? `fbq('set', 'mobileBridge', '${pixelId}', '${appId}')`
+      ? `fbq('set', 'mobileBridge', '${pixelId}', '${appId}');`
       : '';
 
     const pixelCode = `
@@ -150,7 +150,7 @@ export class PixelService {
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '${pixelId}');
-      ${scriptMobileBridge}
+    ${scriptMobileBridge}
     fbq('track', 'PageView');`;
 
     const scriptElement = this.renderer.createElement('script');
