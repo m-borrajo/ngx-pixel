@@ -65,7 +65,7 @@ export class PixelService {
       return;
     }
     this.config.enabled = true;
-    this.addPixelScript(pixelId, this.config.appId);
+    this.addPixelScript(pixelId, this.config.appId, this.config.hash);
   }
 
   /** Remove the Pixel tracking script */
@@ -131,7 +131,7 @@ export class PixelService {
    * @param pixelId The Facebook Pixel ID to use
    * @param appId The Facebook Pixel APP ID to use
    */
-  private addPixelScript(pixelId: string, appId?: string): void {
+  private addPixelScript(pixelId: string, appId?: string, hash?: string): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
@@ -156,6 +156,7 @@ export class PixelService {
     const scriptElement = this.renderer.createElement('script');
     this.renderer.setAttribute(scriptElement, 'id', 'pixel-script');
     this.renderer.setAttribute(scriptElement, 'type', 'text/javascript');
+    if (hash) this.renderer.setAttribute(scriptElement, 'nonce', hash);
     this.renderer.setProperty(scriptElement, 'innerHTML', pixelCode);
     this.renderer.appendChild(this.doc.head, scriptElement);
   }

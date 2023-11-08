@@ -5,6 +5,8 @@ export interface PixelConfiguration {
   pixelId: string;
   /** Your Facebook APP ID, only is required to mobileBridge  */
   appId?: string;
+  /** Your hash to exclude of CSP */
+  hash?: string;
 }
 
 export interface PixelEventProperties {
